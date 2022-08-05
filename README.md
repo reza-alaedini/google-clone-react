@@ -1,5 +1,5 @@
 # Googlee Clone - React JS
-
+Don't Forget to TURN YOUR VPN "ON" if you want to open it in IRAN!
 
 ## Used Package
 - react-player
@@ -12,7 +12,7 @@
 > This website was used for getting prices and fetch method was used for http Requests.
 
 ## Visit Project online :
-- 
+- https://google-clone-react-tan.vercel.app/search
 
 ## In the project directory, you can run:
 
