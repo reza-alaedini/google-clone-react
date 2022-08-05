@@ -1,4 +1,4 @@
-# Googlee Clone - React JS
+# Google Clone - React JS
 Don't Forget to TURN YOUR VPN "ON" if you want to open it in IRAN!
 
 ## Used Package
