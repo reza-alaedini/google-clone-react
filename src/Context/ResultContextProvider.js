@@ -8,14 +8,6 @@ export const ResultContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("Elon Musk");
 
-  // const options = {
-  //   method: "GET",
-  //   headers: {
-  //     "X-RapidAPI-Key": "1d9eee4dd5msh4b78c897106cc98p196394jsn0b47223bceca",
-  //     "X-RapidAPI-Host": "google-search1.p.rapidapi.com",
-  //   },
-  // };
-
   // type: /videos , /news ,...
   const getResults = async (type) => {
     setIsLoading(true);
