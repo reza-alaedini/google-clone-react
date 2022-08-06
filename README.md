@@ -1,5 +1,5 @@
 # Google Clone - React JS
-Don't Forget to TURN YOUR VPN "ON" if you want to open it in IRAN!
+Don't Forget to `TURN YOUR VPN "ON"` if you want to open it in IRAN!
 
 ## Used Package
 - react-player
@@ -23,4 +23,3 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
