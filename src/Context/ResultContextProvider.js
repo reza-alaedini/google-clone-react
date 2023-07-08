@@ -1,10 +1,12 @@
 import React, { createContext, useContext, useState } from "react";
+import axios from "axios";
 
 const ResultContext = createContext();
-const baseUrl = "https://google-search3.p.rapidapi.com/api/v1";
+const baseUrl = "https://google-search74.p.rapidapi.com";
 
 export const ResultContextProvider = ({ children }) => {
-  const [result, setResult] = useState([]);
+  const [allResult, setAllResult] = useState([]);
+  const [imgResult, setImgResult] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState("Elon Musk");
 
@@ -12,34 +14,70 @@ export const ResultContextProvider = ({ children }) => {
   const getResults = async (type) => {
     setIsLoading(true);
 
-    const response = await fetch(`${baseUrl}${type}`, {
+    // const response = await fetch(`${baseUrl}`, {
+    //   method: "GET",
+    //   params: {
+    //     query: 'reza alaedini',
+    //     limit: '10',
+    //     related_keywords: 'false'
+    //   },
+    //   headers: {
+    //     "X-User-Agent": "desktop",
+    //     "X-RapidAPI-Key": "f76438da76mshbca5ef785ed2b6bp107022jsna776f1cc799c",
+    //     "X-RapidAPI-Host": "google-search74.p.rapidapi.com",
+    //   },
+    // });
+
+    // const data = await response.json();
+
+    const res = await axios.request({
       method: "GET",
+      url: "https://google-search74.p.rapidapi.com/",
+      params: {
+        query: searchTerm,
+        limit: "10",
+        related_keywords: "false",
+      },
       headers: {
-        "X-User-Agent": "desktop",
-        "X-Proxy-Location": "EU",
-        "X-RapidAPI-Key": "1d9eee4dd5msh4b78c897106cc98p196394jsn0b47223bceca",
-        "X-RapidAPI-Host": "google-search3.p.rapidapi.com",
+        "X-RapidAPI-Key": "f76438da76mshbca5ef785ed2b6bp107022jsna776f1cc799c",
+        "X-RapidAPI-Host": "google-search74.p.rapidapi.com",
       },
     });
 
-    const data = await response.json();
+    const { results } = res.data;
+    const { knowledge_panel } = res.data;
 
-    if (type.includes("/news")) {
-      setResult(data.entries);
-    } else if (type.includes("/image")) {
-      setResult(data.image_results);
-    } else {
-      setResult(data.results);
-    }
+    console.log(knowledge_panel);
 
-    // setResult(data);
+    setAllResult(results);
+    setImgResult(knowledge_panel);
     setIsLoading(false);
-    console.log(data);
+
+    // if (type.includes("/news")) {
+    //   setResult(res.data.entries);
+    // } else if (type.includes("/image")) {
+    //   setResult(res.data.image_results);
+    // } else {
+    //   setResult(res.data.results);
+    // }
+
+    //   if (type.includes("/image")) {
+    //   setResult(res.data.knowledge_panel.image);
+    // } else {
+    //   setResult(results);
+    // }
   };
 
   return (
     <ResultContext.Provider
-      value={{ getResults, result, searchTerm, setSearchTerm, isLoading }}
+      value={{
+        getResults,
+        allResult,
+        imgResult,
+        searchTerm,
+        setSearchTerm,
+        isLoading,
+      }}
     >
       {children}
     </ResultContext.Provider>

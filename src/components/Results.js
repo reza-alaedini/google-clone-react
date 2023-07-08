@@ -6,7 +6,7 @@ import { useResultContext } from "../Context/ResultContextProvider";
 import Loading from "./Loading";
 
 const Results = () => {
-  const { getResults, result, isLoading, searchTerm, setSearchTerm } =
+  const { getResults, allResult, isLoading, searchTerm, setSearchTerm } =
     useResultContext();
   const location = useLocation();
 
@@ -15,7 +15,7 @@ const Results = () => {
       if (location.pathname === "/videos") {
         getResults(`/search/q=${searchTerm} videos`);
       } else {
-        getResults(`${location.pathname}/q=${searchTerm}&num=40`);
+        getResults(`/query=${searchTerm}&limit=40`);
       }
     }
   }, [searchTerm, location.pathname]);
@@ -26,11 +26,11 @@ const Results = () => {
     case "/search":
       return (
         <div className="flex flex-wrap justify-between space-y-6 sm:px-56">
-          {result?.map(({ link, title, description }, index) => (
-            <div key={index} className="md:w-2/5 w-full">
-              <a href={link} target="_blank" rel="noreferrer">
+          {allResult?.map(({ description, title, url, position }) => (
+            <div key={position} className="md:w-2/5 w-full">
+              <a href={url} target="_blank" rel="noreferrer">
                 <p className="text-sm">
-                  {link.length > 30 ? link.substring(0, 30) : link}
+                  {url.length > 30 ? url.substring(0, 30) : url}
                 </p>
                 <p className="text-lg hover:underline dark:text-blue-300 text-blue-700">
                   {title}
@@ -44,7 +44,7 @@ const Results = () => {
     case "/videos":
       return (
         <div className="flex flex-wrap">
-          {result?.map((video, index) => (
+          {allResult?.map((video, index) => (
             <div key={index} className="p-2 ">
               {video?.additional_links?.[0].href && (
                 <ReactPlayer
@@ -61,7 +61,7 @@ const Results = () => {
     case "/news":
       return (
         <div className="flex flex-wrap justify-between space-y-6 sm:px-56 items-center">
-          {result?.map(({ links, title, id, source }) => (
+          {allResult?.map(({ links, title, id, source }) => (
             <div key={id} className="md:w-2/5 w-full">
               <a
                 href={links?.[0].href}
@@ -85,16 +85,18 @@ const Results = () => {
     case "/image":
       return (
         <div className="flex flex-wrap justify-center items-center">
-          {result?.map(({ image, link: { href, title } }, index) => (
+          {allResult?.map(({ knowledge_panel: { image, description } }) => (
             <a
               className="sm:p-3 p-5"
-              href={href}
-              key={index}
+              href={image?.url}
+              key={image?.page_url}
               target="_blank"
               rel="noreferrer"
             >
-              <img src={image?.src} alt={title} loading="lazy" />
-              <p className="w-36 break-words text-sm mt-2">{title}</p>
+              <img src={image?.url} alt={description?.text} loading="lazy" />
+              <p className="w-36 break-words text-sm mt-2">
+                {description?.text}
+              </p>
             </a>
           ))}
         </div>

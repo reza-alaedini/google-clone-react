@@ -5,9 +5,9 @@ import { NavLink } from "react-router-dom";
 const Links = () => {
   const links = [
     { url: "/search", text: "🔎 All" },
-    { url: "/news", text: "📰 News" },
-    { url: "/image", text: "📸 Images" },
-    { url: "/videos", text: "📺 Videos" },
+    // { url: "/news", text: "📰 News" },
+    // { url: "/image", text: "📸 Images" },
+    // { url: "/videos", text: "📺 Videos" },
   ];
   return (
     <div className="flex sm:justify-around justify-between items-center mt-4">
