@@ -8,7 +8,7 @@ export const ResultContextProvider = ({ children }) => {
   const [allResult, setAllResult] = useState([]);
   const [imgResult, setImgResult] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("Elon Musk");
+  const [searchTerm, setSearchTerm] = useState("Reza Alaedini");
 
   // type: /videos , /news ,...
   const getResults = async (type) => {
@@ -39,7 +39,7 @@ export const ResultContextProvider = ({ children }) => {
         related_keywords: "false",
       },
       headers: {
-        "X-RapidAPI-Key": "f76438da76mshbca5ef785ed2b6bp107022jsna776f1cc799c",
+        "X-RapidAPI-Key": "9771a091a2msh69ae854907548b4p1fdd64jsn754f9f9dd335",
         "X-RapidAPI-Host": "google-search74.p.rapidapi.com",
       },
     });
